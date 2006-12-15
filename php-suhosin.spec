@@ -2,8 +2,8 @@
 Summary:	Advanced protection system for PHP installations
 Name:		php-%{_modname}
 Version:	0.9.16
-Release:	0.1
-License:	PHP 2.02
+Release:	1
+License:	PHP 3.01
 Group:		Development/Languages/PHP
 Source0:	http://www.hardened-php.net/suhosin/_media/%{_modname}-%{version}.tgz
 # Source0-md5:	83db16381732218d0d44fe60988dcaaa
