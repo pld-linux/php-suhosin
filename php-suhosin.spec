@@ -1,5 +1,7 @@
+# TODO: spec filename vs Name
 %define		_modname	suhosin
 Summary:	Advanced protection system for PHP installations
+Summary(pl):	Zaawansowany system zabezpieczeñ dla instalacji PHP
 Name:		php-%{_modname}
 Version:	0.9.16
 Release:	1
@@ -22,6 +24,16 @@ PHP applications and the PHP core.
 Unlike Hardening-Patch Suhosin is binary compatible to normal PHP
 installation, which means it is compatible to 3rd party binary
 extension like ZendOptimizer.
+
+%description -l pl
+Suhosin to zaawansowany system zabezpieczeñ dla instalacji PHP. Zosta³
+zaprojektowany do ochrony serwerów i u¿ytkowników przed znanymi i
+nieznanymi lukami w aplikacjach PHP i samym PHP.
+
+W przeciwieñstwie do ³aty Hardening-Patch Suhosin jest binarnie
+kompatybilny ze zwyk³± instalacj± PHP, co oznacza, ¿e jest
+kompatybilny z binarnymi rozszerzeniami innych producentów, takimi jak
+ZendOptimizer.
 
 %prep
 %setup -q -n suhosin-%{version}
