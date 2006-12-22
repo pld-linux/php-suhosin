@@ -1,4 +1,3 @@
-# TODO: spec filename vs Name
 %define		_modname	suhosin
 Summary:	Advanced protection system for PHP installations
 Summary(pl):	Zaawansowany system zabezpieczeñ dla instalacji PHP
