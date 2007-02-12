@@ -1,6 +1,6 @@
 %define		_modname	suhosin
 Summary:	Advanced protection system for PHP installations
-Summary(pl.UTF-8):   Zaawansowany system zabezpieczeń dla instalacji PHP
+Summary(pl.UTF-8):	Zaawansowany system zabezpieczeń dla instalacji PHP
 Name:		php-%{_modname}
 Version:	0.9.16
 Release:	1
