@@ -49,10 +49,7 @@ install -d $RPM_BUILD_ROOT%{php_sysconfdir}/conf.d
 %{__make} install \
 	INSTALL_ROOT=$RPM_BUILD_ROOT \
 	EXTENSION_DIR=%{php_extensiondir}
-cat <<'EOF' > $RPM_BUILD_ROOT%{php_sysconfdir}/conf.d/%{_modname}.ini
-; Enable %{_modname} extension module
-extension=%{_modname}.so
-EOF
+install %{_modname}.ini $RPM_BUILD_ROOT%{php_sysconfdir}/conf.d/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
