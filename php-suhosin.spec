@@ -1,12 +1,12 @@
-%define		_modname	suhosin
+%define		modname	suhosin
 Summary:	Advanced protection system for PHP installations
 Summary(pl.UTF-8):	Zaawansowany system zabezpieczeń dla instalacji PHP
-Name:		php-%{_modname}
+Name:		php-%{modname}
 Version:	0.9.25
 Release:	1
 License:	PHP 3.01
 Group:		Development/Languages/PHP
-Source0:	http://download.suhosin.org/%{_modname}-%{version}.tgz
+Source0:	http://download.suhosin.org/%{modname}-%{version}.tgz
 # Source0-md5:	316f3c929c376b1ab03df1cfab898d94
 URL:		http://www.hardened-php.net/suhosin/
 BuildRequires:	php-devel >= 3:5.0.0
@@ -49,7 +49,7 @@ install -d $RPM_BUILD_ROOT%{php_sysconfdir}/conf.d
 %{__make} install \
 	INSTALL_ROOT=$RPM_BUILD_ROOT \
 	EXTENSION_DIR=%{php_extensiondir}
-install %{_modname}.ini $RPM_BUILD_ROOT%{php_sysconfdir}/conf.d/
+install %{modname}.ini $RPM_BUILD_ROOT%{php_sysconfdir}/conf.d
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -65,5 +65,5 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc CREDITS Changelog
-%config(noreplace) %verify(not md5 mtime size) %{php_sysconfdir}/conf.d/%{_modname}.ini
-%attr(755,root,root) %{php_extensiondir}/%{_modname}.so
+%config(noreplace) %verify(not md5 mtime size) %{php_sysconfdir}/conf.d/%{modname}.ini
+%attr(755,root,root) %{php_extensiondir}/%{modname}.so
