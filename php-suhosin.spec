@@ -2,12 +2,12 @@
 Summary:	Advanced protection system for PHP installations
 Summary(pl.UTF-8):	Zaawansowany system zabezpieczeń dla instalacji PHP
 Name:		php-%{modname}
-Version:	0.9.27
+Version:	0.9.29
 Release:	1
 License:	PHP 3.01
 Group:		Development/Languages/PHP
 Source0:	http://download.suhosin.org/%{modname}-%{version}.tgz
-# Source0-md5:	9aae02bc2d2bcf9b8bd97cd22f56a8b8
+# Source0-md5:	e3c599e7e344e981f935b2dab90592c1
 URL:		http://www.hardened-php.net/suhosin/
 BuildRequires:	php-devel >= 3:5.0.0
 BuildRequires:	rpmbuild(macros) >= 1.344
