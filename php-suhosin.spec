@@ -3,7 +3,7 @@ Summary:	Advanced protection system for PHP installations
 Summary(pl.UTF-8):	Zaawansowany system zabezpieczeń dla instalacji PHP
 Name:		php-%{modname}
 Version:	0.9.32.1
-Release:	3
+Release:	4
 License:	PHP 3.01
 Group:		Development/Languages/PHP
 Source0:	http://download.suhosin.org/%{modname}-%{version}.tar.gz
