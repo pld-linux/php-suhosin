@@ -1,18 +1,20 @@
+%define		php_name	php%{?php_suffix}
 %define		modname	suhosin
 Summary:	Advanced protection system for PHP installations
 Summary(pl.UTF-8):	Zaawansowany system zabezpieczeń dla instalacji PHP
-Name:		php-%{modname}
+Name:		%{php_name}-%{modname}
 Version:	0.9.32.1
-Release:	8
+Release:	9
 License:	PHP 3.01
 Group:		Development/Languages/PHP
 Source0:	http://download.suhosin.org/%{modname}-%{version}.tar.gz
 # Source0-md5:	26a86f0f684a656c3e789e3eb4ec1db3
 URL:		http://www.hardened-php.net/suhosin/
-BuildRequires:	php-devel >= 3:5.0.0
-BuildRequires:	rpmbuild(macros) >= 1.344
+BuildRequires:	%{php_name}-devel >= 3:5.0.0
+BuildRequires:	rpmbuild(macros) >= 1.650
 %{?requires_php_extension}
 Requires:	php(core) >= 5.0.4
+Provides:	php(%{modname}) = %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -45,11 +47,11 @@ phpize
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{php_sysconfdir}/conf.d
-
 %{__make} install \
 	EXTENSION_DIR=%{php_extensiondir} \
 	INSTALL_ROOT=$RPM_BUILD_ROOT
-cp -a %{modname}.ini $RPM_BUILD_ROOT%{php_sysconfdir}/conf.d
+
+cp -p %{modname}.ini $RPM_BUILD_ROOT%{php_sysconfdir}/conf.d
 
 %clean
 rm -rf $RPM_BUILD_ROOT
