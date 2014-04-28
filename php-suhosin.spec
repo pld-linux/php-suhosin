@@ -12,10 +12,9 @@ Source0:	http://download.suhosin.org/%{modname}-%{version}.tgz
 # Source0-md5:	51bd404520da650e2da4866898c0ae8c
 Patch0:		bug-42.patch
 URL:		http://www.hardened-php.net/suhosin/
-BuildRequires:	%{php_name}-devel >= 3:5.4
+BuildRequires:	%{php_name}-devel >= 4:5.4
 BuildRequires:	rpmbuild(macros) >= 1.650
 %{?requires_php_extension}
-Requires:	php(core) >= 5.0.4
 Provides:	php(%{modname}) = %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
