@@ -3,16 +3,16 @@
 Summary:	Advanced protection system for PHP installations
 Summary(pl.UTF-8):	Zaawansowany system zabezpieczeń dla instalacji PHP
 Name:		%{php_name}-%{modname}
-# NOTE: 0.9.35 drops support for PHP < 5.4, so do not upgrade until pld th main php is still 5.3
-# NOTE: can't find tarball for 0.9.34
-Version:	0.9.33
+# for PHP 5.3, see PHP_5_3 branch
+Version:	0.9.35
 Release:	1
 License:	PHP 3.01
 Group:		Development/Languages/PHP
 Source0:	http://download.suhosin.org/%{modname}-%{version}.tgz
-# Source0-md5:	0ce498a02a8281e4274ea8e390c2b487
+# Source0-md5:	51bd404520da650e2da4866898c0ae8c
+Patch0:		bug-42.patch
 URL:		http://www.hardened-php.net/suhosin/
-BuildRequires:	%{php_name}-devel >= 3:5.0.0
+BuildRequires:	%{php_name}-devel >= 3:5.4
 BuildRequires:	rpmbuild(macros) >= 1.650
 %{?requires_php_extension}
 Requires:	php(core) >= 5.0.4
@@ -40,6 +40,7 @@ ZendOptimizer.
 
 %prep
 %setup -q -n suhosin-%{version}
+%patch0 -p1
 
 %build
 phpize
