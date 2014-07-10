@@ -4,14 +4,14 @@ Summary:	Advanced protection system for PHP installations
 Summary(pl.UTF-8):	Zaawansowany system zabezpieczeń dla instalacji PHP
 Name:		%{php_name}-%{modname}
 # for PHP 5.3, see PHP_5_3 branch
-Version:	0.9.35
+Version:	0.9.36
 Release:	1
 License:	PHP 3.01
 Group:		Development/Languages/PHP
 Source0:	http://download.suhosin.org/%{modname}-%{version}.tgz
-# Source0-md5:	51bd404520da650e2da4866898c0ae8c
+# Source0-md5:	416ba40186bd18a4640d5cf93bb0a1cb
 Patch0:		bug-42.patch
-URL:		http://www.hardened-php.net/suhosin/
+URL:		http://www.suhosin.org/stories/
 BuildRequires:	%{php_name}-devel >= 4:5.4
 BuildRequires:	rpmbuild(macros) >= 1.650
 %{?requires_php_extension}
