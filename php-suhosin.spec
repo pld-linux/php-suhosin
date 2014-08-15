@@ -6,7 +6,7 @@ Name:		%{php_name}-%{modname}
 # NOTE: 0.9.35 drops support for PHP < 5.4, so do not upgrade until pld th main php is still 5.3
 # NOTE: can't find tarball for 0.9.34
 Version:	0.9.33
-Release:	1
+Release:	2
 License:	PHP 3.01
 Group:		Development/Languages/PHP
 Source0:	http://download.suhosin.org/%{modname}-%{version}.tgz
@@ -17,6 +17,7 @@ BuildRequires:	rpmbuild(macros) >= 1.650
 %{?requires_php_extension}
 Requires:	php(core) >= 5.0.4
 Provides:	php(%{modname}) = %{version}
+Obsoletes:	php-suhosin < 0.9.33-1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
