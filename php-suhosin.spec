@@ -5,7 +5,7 @@ Summary(pl.UTF-8):	Zaawansowany system zabezpieczeń dla instalacji PHP
 Name:		%{php_name}-%{modname}
 # for PHP 5.3, see PHP_5_3 branch
 Version:	0.9.36
-Release:	1
+Release:	2
 License:	PHP 3.01
 Group:		Development/Languages/PHP
 Source0:	http://download.suhosin.org/%{modname}-%{version}.tgz
@@ -16,6 +16,7 @@ BuildRequires:	%{php_name}-devel >= 4:5.4
 BuildRequires:	rpmbuild(macros) >= 1.650
 %{?requires_php_extension}
 Provides:	php(%{modname}) = %{version}
+Obsoletes:	php-suhosin < 0.9.33-1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
