@@ -8,8 +8,8 @@ Version:	0.9.38
 Release:	1
 License:	PHP 3.01
 Group:		Development/Languages/PHP
-Source0:	http://download.suhosin.org/%{modname}-%{version}.tgz
-# Source0-md5:	ace745e98493c12cb43f5c35c1526d78
+Source0:	http://download.suhosin.org/%{modname}-%{version}.tar.gz
+# Source0-md5:	0c26402752b0aff69e4b891f062a52bf
 URL:		http://www.suhosin.org/stories/
 BuildRequires:	%{php_name}-devel >= 4:5.4
 BuildRequires:	rpmbuild(macros) >= 1.650
