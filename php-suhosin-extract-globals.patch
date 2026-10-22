@@ -1,0 +1,20 @@
+suhosin's extract() compared the name length without the NUL against sizeof(), so the
+$GLOBALS and $this protection of PHP's extract() never matched
+
+diff --git suhosin-0.9.38.orig/ex_imp.c suhosin-0.9.38/ex_imp.c
+index b5ca46a..da6c668 100644
+--- suhosin-0.9.38.orig/ex_imp.c
++++ suhosin-0.9.38/ex_imp.c
+@@ -163,10 +163,10 @@ PHP_FUNCTION(suhosin_extract)
+ 
+ 			case EXTR_OVERWRITE:
+ 				/* GLOBALS protection */
+-				if (var_exists && var_name_len == sizeof("GLOBALS") && !strcmp(var_name, "GLOBALS")) {
++				if (var_exists && var_name_len == sizeof("GLOBALS")-1 && !strcmp(var_name, "GLOBALS")) {
+ 					break;
+ 				}
+-				if (var_exists && var_name_len == sizeof("this")  && !strcmp(var_name, "this") && EG(scope) && EG(scope)->name_length != 0) {
++				if (var_exists && var_name_len == sizeof("this")-1  && !strcmp(var_name, "this") && EG(scope) && EG(scope)->name_length != 0) {
+ 					break;
+ 				}
+ 				ZVAL_STRINGL(&final_name, var_name, var_name_len, 1);

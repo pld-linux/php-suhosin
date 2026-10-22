@@ -1,0 +1,73 @@
+CVE-2026-109619 class: input filter state, decrypted cookie pointers and do_not_scan
+were reset only in RSHUTDOWN, which PHP skips after a failed request startup
+https://github.com/php/php-src/security/advisories/GHSA-6wmf-4rv5-p3rp
+
+diff --git suhosin-0.9.38.orig/php_suhosin.h suhosin-0.9.38/php_suhosin.h
+index f82c460..1676c3e 100644
+--- suhosin-0.9.38.orig/php_suhosin.h
++++ suhosin-0.9.38/php_suhosin.h
+@@ -65,7 +65,7 @@ extern zend_module_entry suhosin_module_entry;
+ PHP_MINIT_FUNCTION(suhosin);
+ PHP_MSHUTDOWN_FUNCTION(suhosin);
+ PHP_RINIT_FUNCTION(suhosin);
+-PHP_RSHUTDOWN_FUNCTION(suhosin);
++ZEND_MODULE_POST_ZEND_DEACTIVATE_D(suhosin);
+ PHP_MINFO_FUNCTION(suhosin);
+ 
+ #include "ext/standard/basic_functions.h"
+diff --git suhosin-0.9.38.orig/suhosin.c suhosin-0.9.38/suhosin.c
+index 9e2d017..5059527 100644
+--- suhosin-0.9.38.orig/suhosin.c
++++ suhosin-0.9.38/suhosin.c
+@@ -754,12 +754,14 @@ zend_module_entry suhosin_module_entry = {
+ 	PHP_MINIT(suhosin),
+ 	PHP_MSHUTDOWN(suhosin),
+ 	PHP_RINIT(suhosin),
+-	PHP_RSHUTDOWN(suhosin),
++	NULL,
+ 	PHP_MINFO(suhosin),
+ #if ZEND_MODULE_API_NO >= 20010901
+ 	SUHOSIN_EXT_VERSION, /* Replace with version number for your extension */
+ #endif
+-	STANDARD_MODULE_PROPERTIES
++	NO_MODULE_GLOBALS,
++	ZEND_MODULE_POST_ZEND_DEACTIVATE_N(suhosin),
++	STANDARD_MODULE_PROPERTIES_EX
+ };
+ /* }}} */
+ 
+@@ -1091,16 +1093,18 @@ PHP_RINIT_FUNCTION(suhosin)
+ /* }}} */
+ 
+ 
+-/* {{{ PHP_RSHUTDOWN_FUNCTION
++/* {{{ ZEND_MODULE_POST_ZEND_DEACTIVATE_D
+  */
+-PHP_RSHUTDOWN_FUNCTION(suhosin)
++ZEND_MODULE_POST_ZEND_DEACTIVATE_D(suhosin)
+ {
+-	SDEBUG("(RSHUTDOWN)");
++	TSRMLS_FETCH();
++
++	SDEBUG("(POST_DEACTIVATE)");
+ 	
+-	/* We need to clear the input filtering 
+-	   variables in the request shutdown
+-	   because input filtering is done before 
+-	   RINIT */
++	/* Input filtering runs before RINIT, so this state must be cleared
++	   even when RINIT never ran: PHP skips RSHUTDOWN after a failed
++	   request startup, but always calls post-deactivate while the
++	   request heap still exists. */
+ 	   
+ 	SUHOSIN_G(cur_request_variables) = 0;
+ 	SUHOSIN_G(cur_cookie_vars) = 0;
+@@ -1119,6 +1123,8 @@ PHP_RSHUTDOWN_FUNCTION(suhosin)
+         SUHOSIN_G(no_more_uploads) = 0;
+ 	
+ 	SUHOSIN_G(abort_request) = 0;
++	SUHOSIN_G(already_scanned) = 0;
++	SUHOSIN_G(do_not_scan) = 0;
+ 	
+ 	if (SUHOSIN_G(reseed_every_request)) {
+ 		SUHOSIN_G(r_is_seeded) = 0;

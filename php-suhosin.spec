@@ -5,11 +5,20 @@ Summary(pl.UTF-8):	Zaawansowany system zabezpieczeń dla instalacji PHP
 Name:		%{php_name}-%{modname}
 # for PHP 5.3, see PHP_5_3 branch
 Version:	0.9.38
-Release:	1
+Release:	2
 License:	PHP 3.01
 Group:		Development/Languages/PHP
-Source0:	http://download.suhosin.org/%{modname}-%{version}.tar.gz
+Source0:	https://download.suhosin.org/%{modname}-%{version}.tar.gz
 # Source0-md5:	0c26402752b0aff69e4b891f062a52bf
+Patch0:		php-suhosin-rfc1867-php-sync.patch
+Patch1:		php-suhosin-bug78875.patch
+Patch2:		php-suhosin-cve-2023-0662.patch
+Patch3:		php-suhosin-cve-2024-8925.patch
+Patch4:		php-suhosin-rfc1867-header-leak.patch
+Patch5:		php-suhosin-cve-2026-109618.patch
+Patch6:		php-suhosin-request-state.patch
+Patch7:		php-suhosin-extract-globals.patch
+Patch8:		php-suhosin-upload-totalname-length.patch
 URL:		http://www.suhosin.org/stories/
 BuildRequires:	%{php_name}-devel >= 4:5.4
 BuildRequires:	rpmbuild(macros) >= 1.650
@@ -39,6 +48,15 @@ ZendOptimizer.
 
 %prep
 %setup -q -n suhosin-%{version}
+%patch -P0 -p1
+%patch -P1 -p1
+%patch -P2 -p1
+%patch -P3 -p1
+%patch -P4 -p1
+%patch -P5 -p1
+%patch -P6 -p1
+%patch -P7 -p1
+%patch -P8 -p1
 
 %build
 phpize

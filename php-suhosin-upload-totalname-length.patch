@@ -1,0 +1,15 @@
+suhosin.post.max_totalname_length was compared with the base name length for upload fields
+
+diff --git suhosin-0.9.38.orig/ufilter.c suhosin-0.9.38/ufilter.c
+index 203d76c..7a83ede 100644
+--- suhosin-0.9.38.orig/ufilter.c
++++ suhosin-0.9.38/ufilter.c
+@@ -73,7 +73,7 @@ static int check_fileupload_varname(char *varname TSRMLS_DC)
+ 			goto return_failure;
+ 		}
+ 	}
+-	if (SUHOSIN_G(max_post_totalname_length) && SUHOSIN_G(max_post_totalname_length) < var_len) {
++	if (SUHOSIN_G(max_post_totalname_length) && SUHOSIN_G(max_post_totalname_length) < total_len) {
+ 		suhosin_log(S_FILES, "configured POST variable total name length limit exceeded - dropped variable '%s'", var);
+ 		if (!SUHOSIN_G(simulation)) {
+ 			goto return_failure;
